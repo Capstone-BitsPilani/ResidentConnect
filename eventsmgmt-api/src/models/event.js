@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
 var eventSchema = new Schema({
     communityid : {type: Schema.Types.ObjectId, ref: 'community',required: true},
+    hostid:{type: Schema.Types.ObjectId, ref: 'User',required: true},
     name:{type: String,required:true},
     createdat: { type: Date, default: Date.now() , required: true},
     organizer: {
