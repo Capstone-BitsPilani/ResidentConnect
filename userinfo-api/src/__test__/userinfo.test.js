@@ -2,7 +2,7 @@ const app = require('../app');
 const  request =require('supertest');
 const mongoose = require('mongoose');
 
-describe('Test the addLike method', () => {
+describe('Test the health method', () => {
   beforeAll(() => {
     mongoose.connect('mongodb+srv://admin:admin@residentsconnect-cluste.r0t44.mongodb.net/usersinfo?retryWrites=true&w=majority')
 
