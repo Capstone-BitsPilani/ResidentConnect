@@ -1,5 +1,3 @@
-
-
 const { validationResult } = require('express-validator');
 const axios = require ('axios');
 
@@ -55,6 +53,103 @@ exports.getEventById = async function(req, res,next) {
     return next(error);
   }  
   res.json(event.toObject({ getters: true }) );
+}
+
+exports.getAllEvents= async function(req, res,next) {
+  let events,count;
+  try {
+      events = await Event.find();
+      count = await Event.find().countDocuments();
+  } catch (err) {
+    const error = new HttpError(
+      'Fetching communities failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+
+
+  res.json({count: count, events: events.map(event => event.toObject({ getters: true }))});
+}
+//get event by community
+exports.getEventByCommunity = async function(req, res,next) {
+  const communityid=req.params.communityId;
+  let events,count;
+  try{
+      count= await Event.find({"communityid":communityid}).countDocuments();
+      events=await Event.find({"communityid":communityid})
+  }
+  catch (err) {
+      const error = new HttpError(
+        `Something went wrong, could not find a event in ${communityid}`,
+        500
+      );
+      return next(error);
+    }
+
+    
+if (!events) {
+  const error = new HttpError(
+    'Could not find events in the provided community.',
+    404
+  );
+  return next(error);
+}  
+res.json({count: count, events: events.map(event => event.toObject({ getters: true }))});
+}
+
+//get event by city
+exports.getEventByCity = async function(req, res,next) {
+  const city=req.params.city;
+  let events,count;
+  try{
+      count= await Event.find({"city":city}).countDocuments();
+      events=await Event.find({"city":city})
+  }
+  catch (err) {
+      const error = new HttpError(
+        `Something went wrong, could not find a event in ${communityid}`,
+        500
+      );
+      return next(error);
+    }
+
+    
+if (!events) {
+  const error = new HttpError(
+    'Could not find events in the provided community.',
+    404
+  );
+  return next(error);
+}  
+res.json({count: count, events: events.map(event => event.toObject({ getters: true }))});
+}
+
+//get events by creator
+exports.getEventsByHost = async function(req, res,next) {
+  const hostid=req.params.hostid;
+  let events,count;
+  try{
+      count= await Event.find({"hostid":hostid}).countDocuments();
+      events=await Event.find({"hostid":hostid})
+  }
+  catch (err) {
+      const error = new HttpError(
+        `Something went wrong, could not find a event in ${communityid}`,
+        500
+      );
+      return next(error);
+    }
+
+    
+if (!events) {
+  const error = new HttpError(
+    'Could not find events in the provided community.',
+    404
+  );
+  return next(error);
+}  
+res.json({count: count, events: events.map(event => event.toObject({ getters: true }))});
 }
 
 //post
