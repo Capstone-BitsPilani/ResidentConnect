@@ -23,8 +23,8 @@ router.delete('/api/events/:eid',event_controller.deleteEvent);
 
 router.post('/api/events/create',event_controller.createEvent); //done (partial)
 
-router.patch('/api/events/:eid/user/enroll',event_controller.enrollToEvent);
-router.patch('/api/events/:eid/user/unenroll',event_controller.unEnrollToEvent);
+// router.patch('/api/events/:eid/user/enroll',event_controller.enrollToEvent);
+// router.patch('/api/events/:eid/user/unenroll',event_controller.unEnrollToEvent);
 
 
 module.exports = router;

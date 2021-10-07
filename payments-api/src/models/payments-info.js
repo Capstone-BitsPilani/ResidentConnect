@@ -16,6 +16,8 @@ var paymentsinfoSchema = new Schema({
     createdat:{type:Date,required: true, default: Date.now},
     dueat:{type:Date,required: true},
     amt:{type:Number},
+    fine:{type:Number,required: true, default: 0},
+    totamt:{type:Number},
     status:{type: String,
         enum:  ['overdue', 'due', 'paid'],
         default: 'due'
