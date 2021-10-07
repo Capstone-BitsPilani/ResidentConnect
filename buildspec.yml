@@ -18,6 +18,7 @@ phases:
         - sed -i 's@CONTAINER_IMAGE_PAYMENTS@'"$REPOSITORY_PAYMENTS_URI:$TAG"'@' infra/aws/k8s/06-rc-payments-depl.yml
         - sed -i 's@CONTAINER_IMAGE_POLLING@'"$REPOSITORY_POLLING_URI:$TAG"'@' infra/aws/k8s/07-rc-polling-depl.yml
         - sed -i 's@CONTAINER_IMAGE_USERS@'"$REPOSITORY_USERS_URI:$TAG"'@' infra/aws/k8s/08-rc-users-depl.yml
+        - sed -i 's@CONTAINER_IMAGE_EVENTS@'"$REPOSITORY_EVENTS_URI:$TAG"'@' infra/aws/k8s/09-rc-eventsmgmt-depl.yml
 
         # Verify AWS CLI Version        
         - echo "Verify AWS CLI Version..."
@@ -41,6 +42,7 @@ phases:
       - docker build --file payments-api/Dockerfile --tag $REPOSITORY_PAYMENTS_URI:$TAG .
       - docker build --file polling-api/Dockerfile --tag $REPOSITORY_POLLING_URI:$TAG .
       - docker build --file userinfo-api/Dockerfile --tag $REPOSITORY_USERS_URI:$TAG .
+      - docker build --file eventsmgmt-apii/Dockerfile --tag $REPOSITORY_EVENTS_URI:$TAG .
 
   post_build:
     commands:
@@ -74,6 +76,10 @@ phases:
 
       - docker push $REPOSITORY_USERS_URI:$TAG
       - echo "Docker Image Push to ECR Completed -  $REPOSITORY_USERS_URI:$TAG"
+
+      - docker push $REPOSITORY_EVENTS_URI:$TAG
+      - echo "Docker Image Push to ECR Completed -  $REPOSITORY_EVENTS_URI:$TAG"
+
       # Extracting AWS Credential Information using STS Assume Role for kubectl
       - echo "Setting Environment Variables related to AWS CLI for Kube Config Setup"          
       - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild-kubectl --duration-seconds 900)

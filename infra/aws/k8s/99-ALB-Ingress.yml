@@ -44,7 +44,11 @@ spec:
           - path: /api/users/*
             backend:
               serviceName: rc-users-srv
-              servicePort: 4002    
+              servicePort: 4002
+          - path: /api/events/*
+            backend:
+              serviceName: rc-eventsmgmt-srv
+              servicePort: 4003 
           - path: /api/adverts/*
             backend:
               serviceName: rc-buyandsell-srv
