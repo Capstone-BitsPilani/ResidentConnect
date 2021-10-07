@@ -73,3 +73,7 @@ spec:
             backend:
               serviceName: rc-payments-srv
               servicePort: 4012
+          - path: /*
+            backend:
+              serviceName: rc-frontend-srv
+              servicePort: 3000
