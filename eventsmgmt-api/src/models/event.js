@@ -5,8 +5,9 @@ var Schema = mongoose.Schema;
 
 var eventSchema = new Schema({
     communityid : {type: Schema.Types.ObjectId, ref: 'community',required: true},
+    hostid:{type: Schema.Types.ObjectId, ref: 'User',required: true},
     name:{type: String,required:true},
-    createdat: { type: Date, default: Date.now() , required: true},
+    createdAt: { type: Date, default: Date.now() , required: true},
     organizer: {
         name:{type: String,required:true},
         email:{type: String,required:true},
@@ -32,6 +33,7 @@ var eventSchema = new Schema({
         pincode : {type: String}
     },
     city: {type: String},
+    category: {type: String},
     description:{type:String},
     thumbnailimage:{type:String},
     images:[{type:String}],
