@@ -33,6 +33,9 @@ exports.sendReminderMails = async function() {
         console.log(payments);
         payments.map(payment=>{
             const searchquery={'apartments.apartmentid':payment.apartmentid};
+            
+           // axios.post(`https://residentsconnect-stg.srscloudapps.link/api/users/search`,searchquery)
+
             axios.post(`http://localhost:4002/api/users/search`,searchquery)
             .then(response => {
                 const users=response.data.users;
