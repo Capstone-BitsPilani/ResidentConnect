@@ -42,7 +42,7 @@ phases:
       - docker build --file payments-api/Dockerfile --tag $REPOSITORY_PAYMENTS_URI:$TAG .
       - docker build --file polling-api/Dockerfile --tag $REPOSITORY_POLLING_URI:$TAG .
       - docker build --file userinfo-api/Dockerfile --tag $REPOSITORY_USERS_URI:$TAG .
-      - docker build --file eventsmgmt-apii/Dockerfile --tag $REPOSITORY_EVENTS_URI:$TAG .
+      - docker build --file eventsmgmt-api/Dockerfile --tag $REPOSITORY_EVENTS_URI:$TAG .
 
   post_build:
     commands:
